@@ -3,8 +3,13 @@
 import { ILoginProps, ILoginErrors } from "@/interfaces/ILoginProps";
 import React, { useEffect, useState } from "react";
 import validateLoginForm from "@/helpers/validateLoginForm";
+import { login } from "@/helpers/auth.helper";
+import { useRouter } from "next/navigation";
 
-function Login( {token, setToken} ) {
+
+function Login(  ) {
+  const router = useRouter();
+
   const [dataUser, setDataUser] = useState<ILoginProps>({
     email: "",
     password: "",
@@ -36,21 +41,14 @@ function Login( {token, setToken} ) {
     });
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit =  async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+     
+    const response = await login(dataUser);
+    const { token, user } = response; 
+    localStorage.setItem("userSession", JSON.stringify({token, user }))
 
-    fetch("http://localhost:3000",{
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(dataUser)
-
-    })
-    .then((res)=> res.json())
-    .then ((json) => {console.log(json)
-    localStorage.setItem("userToken", json.token) })
-    .catch((err) => console.log(err))
+    router.push("/")
   };
 
   useEffect(() => {

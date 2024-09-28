@@ -3,8 +3,13 @@
 import { IRegisterProps, IRegisterErrors } from "@/interfaces/IRegisterProps";
 import React, { useEffect, useState } from "react";
 import validateRegisterForm from "@/helpers/validateRegisterForm";
+import { register } from "@/helpers/auth.helper";
+import { useRouter } from "next/navigation";
+import Swal from "sweetalert2";
+
 
 function Register() {
+  const router = useRouter()
   const [dataUser, setDataUser] = useState<IRegisterProps>({
     name: "",
     email: "",
@@ -51,11 +56,22 @@ function Register() {
     });
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    alert("Registro exitoso");
-  };
+     await register(dataUser)    
+      Swal.fire({
+        title: "Registro exitoso",
+        text: "Gracias por unirte a nosotros",
+        icon: "success",
+        customClass: {
+          popup: 'bg-white shadow-lg rounded-lg p-6',
+          title: 'text-2xl font-semibold text-gray-800',
+          confirmButton: 'bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded',
+        },
+        buttonsStyling: false, // Necesario para desactivar los estilos por defecto de los botones
+      })
+         router.push("/login")
+      };
 
   useEffect(() => {
     const errors = validateRegisterForm(dataUser);
