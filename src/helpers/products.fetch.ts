@@ -13,7 +13,7 @@ export const getProductsDB = async (): Promise<IProduct[]> => {
     throw new Error(error);
   }
 };
-
+ 
 export const getProductsByIdDB = async (id: string) => {
   try {
     const response = await getProductsDB()

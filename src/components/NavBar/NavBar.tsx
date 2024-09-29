@@ -35,7 +35,7 @@ function NavBar() {
         {userData?.token ? (
           <ul className="flex flex-row justify-evenly items-center pt-2">
             <li>
-              <Link href={"/carrito"}>
+              <Link href={"/cart"}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="36"
@@ -206,7 +206,7 @@ function NavBar() {
               </Link>
             </li>
             <li>
-              <Link href={"login"}>
+              <Link href={"/login"}>
                 <button>sing in</button>
               </Link>
             </li>

@@ -1,8 +1,9 @@
 "use client"
 
-import IProduct from "@/interfaces/IProduct";
+import  IProduct  from "@/interfaces/IProduct";
 import IUserSession from "@/interfaces/IUserSession";
 import React, { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 
 const ProductDetail: React.FC<IProduct> = ({
   id,
@@ -23,15 +24,44 @@ const ProductDetail: React.FC<IProduct> = ({
     }
   }, []);
 
-   const handleClick = () => {
-     if(userData?.token) {
-      // logica carrito compra
-      alert("agregado al carrito")
-     }
-      else {
-        alert("inicia sesion para creatr tu carrito")
+  const handleClick = () => {
+    if (userData?.token) {
+      // Lógica del carrito de compra
+      const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+      const productExsist = cart.findIndex((item: IProduct) => item.id === id); // findeIndex devulve la posicon en el array
+  
+      if (productExsist !== -1) {
+        // Si el producto ya está en el carrito, incrementa la cantidad
+        cart[productExsist].quantity = (cart[productExsist].quantity || 1) + 1;
+      } else {
+        // Si es un producto nuevo, lo agrega al carrito con cantidad 1
+        cart.push({
+          id,
+          name,
+          description,
+          categoryId,
+          image,
+          stock,
+          price,
+          quantity: 1,  // Añadimos una propiedad 'cantidad'
+        });
       }
-   }
+  
+      localStorage.setItem("cart", JSON.stringify(cart));
+      Swal.fire({
+        title: "Product added to your cart",
+        width: 400,
+        padding: "3em",
+      });
+    } else {
+      Swal.fire({
+        title: "You must have an account",
+        width: 400,
+        padding: "3em",
+      });
+    }
+  };
+  
   return (
     <section className="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md">
       <div className="flex flex-col lg:flex-row gap-8">

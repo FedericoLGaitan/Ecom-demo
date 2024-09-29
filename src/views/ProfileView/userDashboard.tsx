@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import IUserSession from "@/interfaces/IUserSession";
+import Orders from "../Order/Orders";
 
 function Dashboard() {
   const [userData, setUserData] = useState<IUserSession | null>(null);
@@ -50,19 +51,7 @@ function Dashboard() {
             Log out
           </button>
         </div>
-
-        <div className="mt-6">
-          <h2 className="text-xl font-semibold mb-2">Orders:</h2>
-          {userData.user.orders && userData.user.orders.length > 0 ? (
-            <ul className="list-disc list-inside">
-              {userData.user.orders.map((order, index) => (
-                <li key={index}>Order {index + 1}</li>
-              ))}
-            </ul>
-          ) : (
-            <p>No orders found.</p>
-          )}
-        </div>
+         <Orders/>
       </div>
     </div>
   );

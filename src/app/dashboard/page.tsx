@@ -1,4 +1,4 @@
-import Dashboard from "@/views/userDashboard/userDashboard";
+import Dashboard from "@/views/ProfileView/userDashboard";
 
 
 export default function HomeNextJS() {
