@@ -3,16 +3,11 @@
 import React, { useEffect, useState } from "react";
 import IUserSession from "@/interfaces/IUserSession";
 import Orders from "../Order/Orders";
+import { useAuth } from "@/context/AuthContext";
 
 function Dashboard() {
-  const [userData, setUserData] = useState<IUserSession | null>(null);
+  const {userData} = useAuth()
 
-  useEffect(() => {
-    if (typeof window !== "undefined" && window.localStorage) {
-      const userData = JSON.parse(localStorage.getItem("userSession")!);
-      setUserData(userData);
-    }
-  }, []);
 
   const handleLogout = () => {
     // Eliminar datos de la sesión del localStorage

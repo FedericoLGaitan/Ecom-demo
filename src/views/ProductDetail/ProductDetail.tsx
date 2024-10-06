@@ -1,8 +1,8 @@
 "use client"
 
+import { useAuth } from "@/context/AuthContext";
 import  IProduct  from "@/interfaces/IProduct";
-import IUserSession from "@/interfaces/IUserSession";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Swal from "sweetalert2";
 
 const ProductDetail: React.FC<IProduct> = ({
@@ -15,15 +15,7 @@ const ProductDetail: React.FC<IProduct> = ({
   price,
 }) => {
  
-  const [userData, setUserData] = useState<IUserSession | null>(null);
-  
-  useEffect(() => {
-    if (typeof window != "undefined" && window.localStorage) {
-      const userData = JSON.parse(localStorage.getItem("userSession")!);
-      setUserData(userData);
-    }
-  }, []);
-
+  const {userData} = useAuth()
   const handleClick = () => {
     if (userData?.token) {
       // Lógica del carrito de compra

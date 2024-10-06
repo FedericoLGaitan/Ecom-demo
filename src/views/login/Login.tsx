@@ -5,9 +5,12 @@ import React, { useEffect, useState } from "react";
 import validateLoginForm from "@/helpers/validateLoginForm";
 import { login } from "@/helpers/auth.helper";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/context/AuthContext";
 
 
 function Login(  ) {
+
+  const {setUserData} = useAuth()
   const router = useRouter();
 
   const [dataUser, setDataUser] = useState<ILoginProps>({
@@ -46,7 +49,7 @@ function Login(  ) {
      
     const response = await login(dataUser);
     const { token, user } = response; 
-    localStorage.setItem("userSession", JSON.stringify({token, user }))
+    setUserData({token, user})
 
     router.push("/")
   };

@@ -1,20 +1,13 @@
 "use client";
 
-import IUserSession from "@/interfaces/IUserSession";
+import { useAuth } from "@/context/AuthContext";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 function NavBar() {
-  const [userData, setUserData] = useState<IUserSession | null>(null);
-  const pathname = usePathname();
+  const {userData} = useAuth()
 
-  useEffect(() => {
-    if (typeof window != "undefined" && window.localStorage) {
-      const userData = JSON.parse(localStorage.getItem("userSession")!);
-      setUserData(userData);
-    }
-  }, [pathname]);
+
   return (
     <nav className="w-screen h-32 bg-[#164E78]">
       <div className="flex flex-row justify-around items-center w-2/3 mx-auto my-14 p-2 bg-[#EEE] rounded-lg shadow-md">
@@ -145,6 +138,7 @@ function NavBar() {
               </Link>
             </li>
             <li>
+              <Link href={"/dashboard"}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="36"
@@ -196,6 +190,7 @@ function NavBar() {
                   </filter>
                 </defs>
               </svg>
+              </Link>
             </li>
           </ul>
         ) : (
