@@ -1,7 +1,7 @@
 export default interface IUserSession {
     token: string,
     user: {
-        adress: string,
+        address: string,
         email: string,
         id: number;
         name:string;

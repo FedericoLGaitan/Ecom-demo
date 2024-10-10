@@ -41,9 +41,13 @@ const ProductDetail: React.FC<IProduct> = ({
   
       localStorage.setItem("cart", JSON.stringify(cart));
       Swal.fire({
-        title: "Product added to your cart",
-        width: 400,
-        padding: "3em",
+        title: "Added to cart",
+        icon: "success",
+        customClass: {
+          popup: 'bg-white shadow-lg rounded-lg p-6',
+          confirmButton: 'bg-[#164E78] hover:bg-[#169978] text-white font-bold py-2 px-4 rounded'
+        },
+        buttonsStyling: false, // Necesario para desactivar los estilos por defecto de los botones
       });
     } else {
       Swal.fire({

@@ -6,13 +6,12 @@ import validateLoginForm from "@/helpers/validateLoginForm";
 import { login } from "@/helpers/auth.helper";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
+import Cookies from "js-cookie";
 
-
-function Login(  ) {
-
-  const {setUserData} = useAuth()
+function Login() {
+  const { setUserData } = useAuth();
   const router = useRouter();
-
+   
   const [dataUser, setDataUser] = useState<ILoginProps>({
     email: "",
     password: "",
@@ -21,10 +20,12 @@ function Login(  ) {
     email: "",
     password: "",
   });
-  const [touched, setTouched] = useState<{ email: boolean; password: boolean }>({
-    email: false,
-    password: false,
-  });
+  const [touched, setTouched] = useState<{ email: boolean; password: boolean }>(
+    {
+      email: false,
+      password: false,
+    }
+  );
 
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -44,14 +45,14 @@ function Login(  ) {
     });
   };
 
-  const handleSubmit =  async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-     
-    const response = await login(dataUser);
-    const { token, user } = response; 
-    setUserData({token, user})
 
-    router.push("/")
+    const response = await login(dataUser);
+    const { token, user } = response;
+    setUserData({ token, user });
+     Cookies.set("cookieToken", token)
+     router.push("/");
   };
 
   useEffect(() => {
@@ -66,7 +67,10 @@ function Login(  ) {
       </div>
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="flex flex-col">
-          <label htmlFor="email" className="text-base font-medium text-gray-700">
+          <label
+            htmlFor="email"
+            className="text-base font-medium text-gray-700"
+          >
             Correo Electrónico:
           </label>
           <input
@@ -84,7 +88,10 @@ function Login(  ) {
           )}
         </div>
         <div className="flex flex-col">
-          <label htmlFor="password" className="text-base font-medium text-gray-700">
+          <label
+            htmlFor="password"
+            className="text-base font-medium text-gray-700"
+          >
             Contraseña:
           </label>
           <input

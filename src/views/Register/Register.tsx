@@ -66,7 +66,7 @@ function Register() {
         customClass: {
           popup: 'bg-white shadow-lg rounded-lg p-6',
           title: 'text-2xl font-semibold text-gray-800',
-          confirmButton: 'bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded',
+          confirmButton: 'bg-[#164E78] hover:bg-[#169978] text-white font-bold py-2 px-4 rounded',
         },
         buttonsStyling: false, // Necesario para desactivar los estilos por defecto de los botones
       })
@@ -79,7 +79,7 @@ function Register() {
   }, [dataUser]);
 
   return (
-    <section className="h-screen flex items-center justify-center bg-blue-100">
+    <section className="h-screen flex items-center justify-center">
       <div className="w-full max-w-lg bg-white p-8 rounded-lg shadow-lg">
         <div className="mb-6 text-center">
           <h1 className="text-3xl font-bold text-gray-800">Register</h1>

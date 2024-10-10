@@ -1,15 +1,15 @@
 "use client"
 
+import { useAuth } from '@/context/AuthContext';
 import { createOrder } from '@/helpers/orders.helper';
 import IProductCart from '@/interfaces/IProduct';
-import IUserSession from '@/interfaces/IUserSession';
 import React, { useEffect, useState } from 'react';
 import Swal from "sweetalert2";
 
 function CartView() {
 
   const [cartproducts, setCartproducts] = useState<IProductCart[]>([]);
-  const [userData, setUserData] = useState<IUserSession | null>(null);
+  const {userData} = useAuth()
 
   
   useEffect(() => {
@@ -18,13 +18,6 @@ function CartView() {
     setCartproducts(cart);
   }, []);
 
-  
-  useEffect(() => {
-    if (typeof window != "undefined" && window.localStorage) {
-      const userData = JSON.parse(localStorage.getItem("userSession")!);
-      setUserData(userData);
-    }
-  }, []);
   
   const handleClick = async () => {
     const idProducts = cartproducts.map(product => product.id)
@@ -43,7 +36,7 @@ function CartView() {
       localStorage.setItem("cart", "[]")
   }
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md">
+    <div className="w-full max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md">
       <h2 className="text-2xl font-semibold mb-4">Your Cart</h2>
       <ul className="space-y-4">
         {cartproducts.map((product, index) => (
@@ -51,7 +44,7 @@ function CartView() {
             <img
               src={product.image}
               alt={product.name}
-              className="w-24 h-24 object-cover mr-6"
+              className="w-24 h-24 object-fit mr-6"
             />
             <div className="flex-1">
               <h3 className="text-lg font-medium">{product.name}</h3>
@@ -59,12 +52,13 @@ function CartView() {
               <p className="text-sm text-gray-700">Price: ${product.price}</p>
               <p className="text-sm text-gray-700">Quantity: {product.quantity}</p>
             </div>
+            <div><button>E</button></div>
           </li>
         ))}
       </ul>
       <div>
-        <p>Total: </p>
-        <button onClick={handleClick}>Checkout</button>
+        <p className='font-poppins font-bold m-2'>Total: </p>
+        <button onClick={handleClick} className="p-2 bg-[#164E78] rounded-md font-poppins font-bold text-[#EEE]">Checkout</button>
       </div>
     </div>
   );

@@ -2,7 +2,7 @@
 
 import { useAuth } from "@/context/AuthContext";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 function NavBar() {
   const {userData} = useAuth()
@@ -194,15 +194,15 @@ function NavBar() {
             </li>
           </ul>
         ) : (
-          <ul>
+          <ul className="flex flex-row gap-3">
             <li>
               <Link href={"/register"}>
-                <button>register</button>
+                <button className="p-2 bg-[#164E78] rounded-md font-poppins font-bold text-[#EEE]">register</button>
               </Link>
             </li>
             <li>
               <Link href={"/login"}>
-                <button>sing in</button>
+                <button className="p-2 bg-[#164E78] rounded-md font-poppins font-bold text-[#EEE]">sing in</button>
               </Link>
             </li>
           </ul>

@@ -1,7 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import IUserSession from "@/interfaces/IUserSession";
+import React from "react";
 import Orders from "../Order/Orders";
 import { useAuth } from "@/context/AuthContext";
 
@@ -22,15 +21,15 @@ function Dashboard() {
   }
 
   return (
-    <div className="container mx-auto p-6 bg-gray-100 min-h-screen">
-      <div className="bg-white shadow-md rounded-lg p-6 max-w-md mx-auto">
+    <div className="container w-full p-6 items-center min-h-screen">
+      <div className="bg-white shadow-md rounded-lg p-6 w-3/5 mx-auto">
         <h1 className="text-2xl font-bold mb-4">User Dashboard</h1>
 
         <div className="mb-4">
           <span className="font-bold">Name:</span> {userData.user.name}
         </div>
         <div className="mb-4">
-          <span className="font-bold">Address:</span> {userData.user.adress}
+          <span className="font-bold">Address:</span> {userData.user.address}
         </div>
         <div className="mb-4">
           <span className="font-bold">Email:</span> {userData.user.email}

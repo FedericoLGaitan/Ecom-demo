@@ -50,7 +50,7 @@ function Orders() {
                   <img
                     src={product.image}
                     alt={product.name}
-                    className="w-16 h-16 object-cover rounded mr-4"
+                    className="w-16 h-16 object-fit rounded mr-4"
                   />
                   <div className="flex-1">
                     <h5 className="text-lg font-medium">{product.name}</h5>
