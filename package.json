@@ -10,13 +10,18 @@
   },
   "dependencies": {
     "@sweetalert2/themes": "^5.0.18",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
     "flowbite": "^2.5.2",
     "js-cookie": "^3.0.5",
+    "lucide-react": "^0.453.0",
     "next": "14.2.8",
     "react": "^18",
     "react-dom": "^18",
     "server-only": "^0.0.1",
-    "sweetalert2": "^11.14.1"
+    "sweetalert2": "^11.14.1",
+    "tailwind-merge": "^2.5.4",
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@types/js-cookie": "^3.0.6",
