@@ -62,7 +62,6 @@ const config: Config = {
   			sm: 'calc(var(--radius) - 4px)'
   		}
   	},
-  	plugins: [\r\n    require('flowbite/plugin'),\r\n  ]
   },
     plugins: [require("tailwindcss-animate")]
 }

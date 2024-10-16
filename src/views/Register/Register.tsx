@@ -6,6 +6,7 @@ import validateRegisterForm from "@/helpers/validateRegisterForm";
 import { register } from "@/helpers/auth.helper";
 import { useRouter } from "next/navigation";
 import Swal from "sweetalert2";
+import { Button } from "@/components/ui/button";
 
 
 function Register() {
@@ -79,7 +80,7 @@ function Register() {
   }, [dataUser]);
 
   return (
-    <section className="h-screen flex items-center justify-center">
+    <section className="h-screen flex items-center justify-center font-poppins">
       <div className="w-full max-w-lg bg-white p-8 rounded-lg shadow-lg">
         <div className="mb-6 text-center">
           <h1 className="text-3xl font-bold text-gray-800">Register</h1>
@@ -181,12 +182,12 @@ function Register() {
           </div>
 
           <div className="text-center">
-            <button
+            <Button
               type="submit"
-              className="w-full bg-blue-700 text-white font-semibold py-2 px-4 rounded hover:bg-blue-800 transition duration-300"
+              className="w-full text-slate-200 font-semibold py-2 px-4 rounded hover:bg-blue-700 transition duration-300"
             >
               Register
-            </button>
+            </Button>
           </div>
         </form>
       </div>

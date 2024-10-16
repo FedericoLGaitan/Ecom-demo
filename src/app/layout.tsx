@@ -15,7 +15,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="flex flex-col flex-nowrap justify-between w-screen h-screen bg-[#FBFBFB]">
+      <body className="flex flex-col flex-nowrap justify-between bg-[#FBFBFB] h-[100vh] w-[100vw] gap-5">
         <UserProvider>
         <NavBar/>
         {children}

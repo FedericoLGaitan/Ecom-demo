@@ -7,6 +7,7 @@ import { login } from "@/helpers/auth.helper";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import Cookies from "js-cookie";
+import { Button } from "@/components/ui/button";
 
 function Login() {
   const { setUserData } = useAuth();
@@ -61,7 +62,7 @@ function Login() {
   }, [dataUser]);
 
   return (
-    <section className="max-w-md mx-auto bg-white shadow-lg rounded-lg p-8">
+    <section className="max-w-md mx-auto bg-white shadow-lg rounded-lg p-8 font-poppins">
       <div className="mb-6 text-center">
         <h1 className="text-3xl font-bold text-gray-800">Iniciar Sesión</h1>
       </div>
@@ -109,12 +110,12 @@ function Login() {
           )}
         </div>
         <div className="text-center">
-          <button
+          <Button
             type="submit"
-            className="w-full bg-blue-600 text-white font-semibold py-3 rounded-lg hover:bg-blue-700 transition duration-300"
+            className="w-full text-slate-200 font-semibold py-3 rounded-lg hover:bg-blue-700 transition duration-300"
           >
             Iniciar Sesión
-          </button>
+          </Button>
         </div>
       </form>
     </section>

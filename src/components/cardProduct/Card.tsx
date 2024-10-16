@@ -2,6 +2,8 @@
 
 import IProduct from '@/interfaces/IProduct';
 import React from 'react';
+import { Card, CardContent, CardTitle } from '../ui/card';
+import { Button } from '../ui/button';
 
 
 const CardProduct: React.FC<IProduct> = ({ name, price, description, image, stock, categoryId, id }) => {
@@ -9,22 +11,22 @@ const CardProduct: React.FC<IProduct> = ({ name, price, description, image, stoc
 
   return (
     
-    <div className="w-64 h-96 bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col justify-between">
-      <div className="p-4">
+    <Card className="w-52 h-82 mx-auto bg-white rounded-lg shadow-md hover:scale-110 transition-shadow duration-300 flex flex-col justify-between">
+      <CardContent className="p-2">
         <img
-          className="w-full h-48 object-contain"
+          className="w-full h-52 object-contain"
           src={image}
           alt={`Imagen de ${name}`}
         />
-      </div>
-      <div className="p-4 flex flex-col items-center text-center">
-        <h3 className="text-lg font-bold text-gray-800 mb-2 truncate">{name}</h3>
-        <p className="text-lg font-semibold text-green-600 mb-4">${price}</p>
-        <button className="w-full p-2 bg-blue-600 text-white font-bold text-sm rounded-md hover:bg-blue-700 transition-colors duration-200">
+      </CardContent>
+      <CardContent className="p-2 flex flex-col items-center text-center">
+        <CardTitle className="text-lg font-bold text-gray-800 mb-1 truncate">{name}</CardTitle>
+        <p className="text-lg font-semibold text-green-600 mb-1">${price}</p>
+        <Button className="w-full p-6 text-slate-200 font-bold text-sm rounded-md hover:bg-blue-700 transition-colors duration-200">
           See detail
-        </button>
-      </div>
-    </div>
+        </Button>
+      </CardContent>
+    </Card>
   );
 };
 

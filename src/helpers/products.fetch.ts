@@ -10,7 +10,7 @@ export const getProductsDB = async (): Promise<IProduct[]> => {
     const products: IProduct[] = await response.json();
     return products;
   } catch (error: any) {
-    throw new Error(error);
+    throw new Error(error)
   }
 };
  
@@ -21,6 +21,8 @@ export const getProductsByIdDB = async (id: string) => {
     if(!product) throw new Error("Product not found")
       return product
   } catch (error: any) {
-    throw new Error(error)
+    throw new Error(error);
   }
 } 
+
+

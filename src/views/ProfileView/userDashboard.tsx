@@ -11,7 +11,7 @@ function Dashboard() {
   const handleLogout = () => {
     // Eliminar datos de la sesión del localStorage
     localStorage.removeItem('userSession');
-  
+    
     // Redireccionar a la página de inicio o login
     window.location.href = '/'; // Cambia esta ruta según sea necesario
   };
