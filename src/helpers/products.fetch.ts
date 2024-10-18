@@ -5,7 +5,7 @@ const APIURL = process.env.NEXT_PUBLIC_API_URL;
 export const getProductsDB = async (): Promise<IProduct[]> => {
   try {
     const response = await fetch(`${APIURL}/products`, {
-      next: {revalidate: 1200}
+     cache: 'no-cache'
     });
     const products: IProduct[] = await response.json();
     return products;
