@@ -1,9 +1,10 @@
 
+
 import React from 'react';
 import CardList from '@/components/CardList.tsx/CardList';
 import {CarouselHome} from '@/components/CarouselHome/CarouselHome';
 import SliderInfo from '@/components/SliderInfo/SliderInfo';
-import Categories from '@/components/Categories/Categories';
+import ChooseCategory from '@/components/ChooseCategory/ChooseCategories';
 
 
 export default function Home() {
@@ -13,7 +14,7 @@ export default function Home() {
     <main>
     <CarouselHome/>
     <SliderInfo/>
-    <Categories/>
+    <ChooseCategory/>
     <CardList/>
    </main>
   )

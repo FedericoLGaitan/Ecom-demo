@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
 import { useAuth } from "@/context/AuthContext";
-import  IProduct  from "@/interfaces/IProduct";
+import IProduct from "@/interfaces/IProduct";
 import React from "react";
 import Swal from "sweetalert2";
 
@@ -14,17 +14,17 @@ const ProductDetail: React.FC<IProduct> = ({
   stock,
   price,
 }) => {
- 
-  const {userData} = useAuth()
+  const { userData } = useAuth();
+  
   const handleClick = () => {
     if (userData?.token) {
       // Lógica del carrito de compra
       const cart = JSON.parse(localStorage.getItem("cart") || "[]");
-      const productExsist = cart.findIndex((item: IProduct) => item.id === id); // findeIndex devulve la posicon en el array
-  
-      if (productExsist !== -1) {
+      const productExists = cart.findIndex((item: IProduct) => item.id === id);
+
+      if (productExists !== -1) {
         // Si el producto ya está en el carrito, incrementa la cantidad
-        cart[productExsist].quantity = (cart[productExsist].quantity || 1) + 1;
+        cart[productExists].quantity = (cart[productExists].quantity || 1) + 1;
       } else {
         // Si es un producto nuevo, lo agrega al carrito con cantidad 1
         cart.push({
@@ -35,10 +35,10 @@ const ProductDetail: React.FC<IProduct> = ({
           image,
           stock,
           price,
-          quantity: 1,  // Añadimos una propiedad 'cantidad'
+          quantity: 1, // Añadimos una propiedad 'cantidad'
         });
       }
-  
+
       localStorage.setItem("cart", JSON.stringify(cart));
       Swal.fire({
         title: "Added to cart",
@@ -73,11 +73,14 @@ const ProductDetail: React.FC<IProduct> = ({
         {/* Detalles del producto */}
         <div className="flex-1">
           <h1 className="text-3xl font-bold text-gray-800 mb-4">{name}</h1>
-          <p className="text-2xl text-green-600 font-semibold mb-4">${price}</p>
+          <p className="text-2xl text-green-600 font-semibold mb-4">${price.toFixed(2)}</p>
           <p className="text-sm text-gray-600 mb-6">{description}</p>
 
           {/* Botón de agregar al carrito */}
-          <button  onClick={handleClick} className="w-full p-3 bg-blue-600 text-white font-bold text-sm rounded-md hover:bg-blue-700 transition-colors duration-200">
+          <button 
+            onClick={handleClick} 
+            className="w-full p-3 bg-blue-600 text-white font-bold text-sm rounded-md hover:bg-blue-700 transition-colors duration-200"
+          >
             Add to cart
           </button>
 

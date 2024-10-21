@@ -26,3 +26,13 @@ export const getProductsByIdDB = async (id: string) => {
 } 
 
 
+export const getProductsByCategory = async (id: string) => {
+  try {
+    const response = await getProductsDB();
+    const productsByCategory = response.filter((product) => product.categoryId.toString() === id)
+    if(productsByCategory.length === 0) throw new Error("No products finded in this category");
+    return productsByCategory
+  } catch (error: any) {
+    throw new Error(error)
+  }
+}

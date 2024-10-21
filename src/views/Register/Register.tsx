@@ -8,9 +8,9 @@ import { useRouter } from "next/navigation";
 import Swal from "sweetalert2";
 import { Button } from "@/components/ui/button";
 
-
 function Register() {
-  const router = useRouter()
+  const router = useRouter();
+
   const [dataUser, setDataUser] = useState<IRegisterProps>({
     name: "",
     email: "",
@@ -31,7 +31,7 @@ function Register() {
     password: boolean;
     address: boolean;
     phone: boolean;
-  }>( {
+  }>({
     name: false,
     email: false,
     password: false,
@@ -57,22 +57,53 @@ function Register() {
     });
   };
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-     await register(dataUser)    
-      Swal.fire({
-        title: "Registro exitoso",
-        text: "Gracias por unirte a nosotros",
-        icon: "success",
-        customClass: {
-          popup: 'bg-white shadow-lg rounded-lg p-6',
-          title: 'text-2xl font-semibold text-gray-800',
-          confirmButton: 'bg-[#164E78] hover:bg-[#169978] text-white font-bold py-2 px-4 rounded',
-        },
-        buttonsStyling: false, // Necesario para desactivar los estilos por defecto de los botones
-      })
-         router.push("/login")
-      };
+ const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  event.preventDefault();
+  
+  if (Object.values(dataUser).some(value => value.trim() === "")) {
+    Swal.fire({
+      title: "Error",
+      text: "Por favor, completa todos los campos.",
+      icon: "error",
+      customClass: {
+        popup: 'bg-white shadow-lg rounded-lg p-6',
+        title: 'text-2xl font-semibold text-gray-800',
+        confirmButton: 'bg-[#164E78] hover:bg-[#169978] text-white font-bold py-2 px-4 rounded',
+      },
+      buttonsStyling: false,
+    });
+    return;
+  }
+  // Verifica si hay errores antes de proceder
+  const errors = validateRegisterForm(dataUser);
+  setError(errors);
+  
+  // Si hay errores, no se envía el formulario
+  if (Object.values(errors).some(error => error !== "")) {
+    return;
+  }
+  console.log(dataUser)
+  await register(dataUser);
+  Swal.fire({
+    title: "Registro exitoso",
+    text: "Gracias por unirte a nosotros",
+    icon: "success",
+    customClass: {
+      popup: 'bg-white shadow-lg rounded-lg p-6',
+      title: 'text-2xl font-semibold text-gray-800',
+      confirmButton: 'bg-[#164E78] hover:bg-[#169978] text-white font-bold py-2 px-4 rounded',
+    },
+    buttonsStyling: false,
+  });
+  setDataUser({
+    name: "",
+    email: "",
+    password: "",
+    address: "",
+    phone: "",
+  })
+  router.push("/login");
+};
 
   useEffect(() => {
     const errors = validateRegisterForm(dataUser);
@@ -80,111 +111,36 @@ function Register() {
   }, [dataUser]);
 
   return (
-    <section className="h-screen flex items-center justify-center font-poppins">
-      <div className="w-full max-w-lg bg-white p-8 rounded-lg shadow-lg">
+    <section className="min-h-1/2 flex justify-center font-poppins">
+      <div className="w-full max-w-md bg-[#EEE] p-8 rounded-lg shadow-lg">
         <div className="mb-6 text-center">
           <h1 className="text-3xl font-bold text-gray-800">Register</h1>
         </div>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="flex flex-col">
-            <label htmlFor="name" className="text-sm font-medium text-gray-700">
-              Name:
-            </label>
-            <input
-              type="text"
-              name="name"
-              id="name"
-              value={dataUser.name}
-              onChange={handleOnChange}
-              onBlur={handleOnBlur}
-              placeholder="Your Name"
-              className="border border-gray-300 p-2 rounded focus:outline-none focus:ring focus:ring-blue-300"
-            />
-            {touched.name && error.name && (
-              <span className="text-red-500 text-sm">{error.name}</span>
-            )}
-          </div>
-
-          <div className="flex flex-col">
-            <label htmlFor="email" className="text-sm font-medium text-gray-700">
-              Email:
-            </label>
-            <input
-              type="email"
-              name="email"
-              id="email"
-              value={dataUser.email}
-              onChange={handleOnChange}
-              onBlur={handleOnBlur}
-              placeholder="user@mail.com"
-              className="border border-gray-300 p-2 rounded focus:outline-none focus:ring focus:ring-blue-300"
-            />
-            {touched.email && error.email && (
-              <span className="text-red-500 text-sm">{error.email}</span>
-            )}
-          </div>
-
-          <div className="flex flex-col">
-            <label htmlFor="password" className="text-sm font-medium text-gray-700">
-              Password:
-            </label>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              value={dataUser.password}
-              onChange={handleOnChange}
-              onBlur={handleOnBlur}
-              placeholder="********"
-              className="border border-gray-300 p-2 rounded focus:outline-none focus:ring focus:ring-blue-300"
-            />
-            {touched.password && error.password && (
-              <span className="text-red-500 text-sm">{error.password}</span>
-            )}
-          </div>
-
-          <div className="flex flex-col">
-            <label htmlFor="address" className="text-sm font-medium text-gray-700">
-              Address:
-            </label>
-            <input
-              type="text"
-              name="address"
-              id="address"
-              value={dataUser.address}
-              onChange={handleOnChange}
-              onBlur={handleOnBlur}
-              placeholder="Your Address"
-              className="border border-gray-300 p-2 rounded focus:outline-none focus:ring focus:ring-blue-300"
-            />
-            {touched.address && error.address && (
-              <span className="text-red-500 text-sm">{error.address}</span>
-            )}
-          </div>
-
-          <div className="flex flex-col">
-            <label htmlFor="phone" className="text-sm font-medium text-gray-700">
-              Phone:
-            </label>
-            <input
-              type="tel"
-              name="phone"
-              id="phone"
-              value={dataUser.phone}
-              onChange={handleOnChange}
-              onBlur={handleOnBlur}
-              placeholder="Your Phone"
-              className="border border-gray-300 p-2 rounded focus:outline-none focus:ring focus:ring-blue-300"
-            />
-            {touched.phone && error.phone && (
-              <span className="text-red-500 text-sm">{error.phone}</span>
-            )}
-          </div>
-
+        <form onSubmit={handleSubmit} >
+          {["name", "email", "password", "address", "phone"].map((field) => (
+            <div key={field} className="flex flex-col gap-2">
+              <label htmlFor={field} className="text-sm font-medium text-gray-700 capitalize">
+                {field}:
+              </label>
+              <input
+                type={field === "password" ? "password" : field === "email" ? "email" : "text"}
+                name={field}
+                id={field}
+                value={dataUser[field as keyof IRegisterProps]}
+                onChange={handleOnChange}
+                onBlur={handleOnBlur}
+                placeholder={`Your ${field.charAt(0).toUpperCase() + field.slice(1)}`}
+                className="border border-gray-300 p-2 rounded focus:outline-none focus:ring focus:ring-blue-300"
+              />
+              {touched[field as keyof typeof touched] && error[field as keyof IRegisterErrors] && (
+                <span className="text-red-500 text-sm">{error[field as keyof IRegisterErrors]}</span>
+              )}
+            </div>
+          ))}
           <div className="text-center">
             <Button
               type="submit"
-              className="w-full text-slate-200 font-semibold py-2 px-4 rounded hover:bg-blue-700 transition duration-300"
+              className="w-full text-slate-200 font-semibold py-2 px-4 rounded hover:bg-blue-700 transition duration-300 mt-2"
             >
               Register
             </Button>

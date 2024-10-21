@@ -43,8 +43,8 @@ function SliderInfo() {
                     <div>
                         <Card className='shadow-none border-none bg-transparent'>
                             <CarouselContent className='flex flex-col justify-center p-2 items-center font-poppins'>
-                                <h5 className='sm:text-lg text-wrap font-bold'>{info.title}</h5>
-                                <p className='text-xs text-wrap'>{info.description}</p>
+                                <h5 className='sm:text-lg text-wrap text-center font-bold'>{info.title}</h5>
+                                <p className='lg:text-xs lg:inline-flex text-[0.5rem] text-wrap text-center'>{info.description}</p>
                             </CarouselContent>
                         </Card>
                     </div>

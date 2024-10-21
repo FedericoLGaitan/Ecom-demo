@@ -5,15 +5,11 @@ import Orders from "../Order/Orders";
 import { useAuth } from "@/context/AuthContext";
 
 function Dashboard() {
-  const {userData} = useAuth()
-
+  const { userData } = useAuth();
 
   const handleLogout = () => {
-    // Eliminar datos de la sesión del localStorage
-    localStorage.removeItem('userSession');
-    
-    // Redireccionar a la página de inicio o login
-    window.location.href = '/'; // Cambia esta ruta según sea necesario
+    localStorage.removeItem("userSession");
+    window.location.href = "/"; // Cambia esta ruta según sea necesario
   };
 
   if (!userData) {
@@ -21,9 +17,9 @@ function Dashboard() {
   }
 
   return (
-    <div className="container w-full p-6 items-center min-h-screen">
-      <div className="bg-white shadow-md rounded-lg p-6 w-3/5 mx-auto">
-        <h1 className="text-2xl font-bold mb-4">User Dashboard</h1>
+    <div className="container mx-auto p-4 sm:p-6 lg:p-8">
+      <div className="bg-white shadow-md rounded-lg p-4 sm:p-6 w-full max-w-lg mx-auto">
+        <h1 className="text-xl sm:text-2xl font-bold mb-4">User Dashboard</h1>
 
         <div className="mb-4">
           <span className="font-bold">Name:</span> {userData.user.name}
@@ -40,12 +36,12 @@ function Dashboard() {
         <div className="mb-4">
           <button
             onClick={handleLogout}
-            className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 transition duration-200"
+            className="w-full bg-red-500 text-white py-2 rounded hover:bg-red-600 transition duration-200"
           >
             Log out
           </button>
         </div>
-         <Orders/>
+        <Orders />
       </div>
     </div>
   );
