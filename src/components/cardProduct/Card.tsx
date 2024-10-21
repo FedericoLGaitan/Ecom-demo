@@ -8,7 +8,7 @@ import Link from 'next/link';
 import IconButton from '../IconButton/IconButton';
 import { useRouter } from 'next/navigation';
 
-const CardProduct: React.FC<IProduct> = ({ name, price, description, image, stock, categoryId, id }) => {
+const CardProduct: React.FC<IProduct> = ({ name, price, image, id }) => {
   const router = useRouter();
 
   return (
