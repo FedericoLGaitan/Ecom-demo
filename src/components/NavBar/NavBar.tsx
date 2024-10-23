@@ -32,10 +32,16 @@ function NavBar() {
         </h3>
       </Link>
 
-       {/* Icono de búsqueda */}
-       <div className="relative w-1/3">
-        <button onClick={() => setSearchVisible(!searchVisible)} className="p-2">
-          <Search size={24} className="text-gray-600 hover:text-gray-800 transition" />
+      {/* Icono de búsqueda */}
+      <div className="relative w-1/3">
+        <button
+          onClick={() => setSearchVisible(!searchVisible)}
+          className="p-2"
+        >
+          <Search
+            size={24}
+            className="text-gray-600 hover:text-gray-800 transition"
+          />
         </button>
 
         {searchVisible && (
@@ -48,10 +54,16 @@ function NavBar() {
               onChange={(e) => setSearchTerm(e.target.value)}
             />
             <div className="flex justify-between mt-2">
-              <button onClick={handleSearch} className="bg-blue-500 text-white rounded px-2 py-1 hover:bg-blue-700 transition">
+              <button
+                onClick={handleSearch}
+                className="bg-blue-500 text-white rounded px-2 py-1 hover:bg-blue-700 transition"
+              >
                 Search
               </button>
-              <button onClick={() => setSearchVisible(false)} className="text-gray-500 hover:underline">
+              <button
+                onClick={() => setSearchVisible(false)}
+                className="text-gray-500 hover:underline"
+              >
                 Cancel
               </button>
             </div>
@@ -59,18 +71,25 @@ function NavBar() {
         )}
       </div>
 
-
       {/* Menú de usuario */}
       {userData?.token ? (
         <ul className="flex flex-row justify-center gap-2 mt-4 sm:mt-0">
           <li>
             <Link href={"/cart"}>
-              <ShoppingCartIcon strokeWidth="1" size="28" className="hover:text-gray-700 transition duration-300" />
+              <ShoppingCartIcon
+                strokeWidth="1"
+                size="28"
+                className="hover:text-gray-700 transition duration-300"
+              />
             </Link>
           </li>
           <li>
             <Link href={"/favorites"}>
-              <Heart strokeWidth="1" size="28" className="hover:text-gray-700 transition duration-300" />
+              <Heart
+                strokeWidth="1"
+                size="28"
+                className="hover:text-gray-700 transition duration-300"
+              />
             </Link>
           </li>
           <li>
@@ -95,8 +114,6 @@ function NavBar() {
           </li>
         </ul>
       )}
-
-     
     </nav>
   );
 }

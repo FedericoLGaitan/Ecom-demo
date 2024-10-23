@@ -82,7 +82,7 @@ function Register() {
   if (Object.values(errors).some(error => error !== "")) {
     return;
   }
-  console.log(dataUser)
+  
   await register(dataUser);
   Swal.fire({
     title: "Registro exitoso",
